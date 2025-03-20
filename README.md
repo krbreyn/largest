@@ -9,6 +9,9 @@ Usage of largest:
   -d, --dir bool
   
     	Include directories (excluded by default)
+
+  -r bool
+      Reverse (print the smallest files)
 ```
 
 Example:
