@@ -8,7 +8,7 @@ Usage of largest:
      
   -d, --dir bool
   
-    	Include directories (included by default)
+    	Include directories (excluded by default)
 ```
 
 Example:
