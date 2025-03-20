@@ -28,8 +28,6 @@ const usage = `Usage of largest:
     	Lines of output (default: 1)
   -d, --dir bool
     	Do not include directories (included by default)
-  --debug
-    	Debug information
 `
 
 func processArgs() {
