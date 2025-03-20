@@ -13,8 +13,9 @@ import (
 )
 
 var (
-	lines int
-	dir   bool
+	lines   int
+	dir     bool
+	reverse bool
 )
 
 func main() {
@@ -28,6 +29,8 @@ const usage = `Usage of largest:
     	Lines of output (default: 1)
   -d, --dir bool
     	Do not include directories (included by default)
+  -r bool
+  		Reverse (print the smallest files)
 `
 
 func processArgs() {
@@ -36,6 +39,8 @@ func processArgs() {
 
 	flag.BoolVar(&dir, "d", false, "Include directories.")
 	flag.BoolVar(&dir, "dir", false, "Include directories.")
+
+	flag.BoolVar(&reverse, "r", false, "Reverse (print smallest).")
 
 	flag.Usage = func() { fmt.Print(usage) }
 
@@ -204,9 +209,15 @@ func getDirectorySizeIter(root string) uint64 {
 // }
 
 func printByLargest(largest []Entry) {
-	sort.Slice(largest, func(i, j int) bool {
-		return largest[i].Size > largest[j].Size
-	})
+	if !reverse {
+		sort.Slice(largest, func(i, j int) bool {
+			return largest[i].Size > largest[j].Size
+		})
+	} else {
+		sort.Slice(largest, func(i, j int) bool {
+			return largest[i].Size < largest[j].Size
+		})
+	}
 
 	for i, l := range largest {
 		if i >= lines {
